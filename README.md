@@ -32,8 +32,31 @@ Read https://raw.githubusercontent.com/manmal/planz/refs/heads/main/SKILL.md and
 
 ### From Source
 
-Requires [Zig 0.15+](https://ziglang.org/download/) and SQLite3:
+Requires [Zig 0.15+](https://ziglang.org/download/) and SQLite3 development libraries.
 
+**Check prerequisites:**
+```bash
+# Check Zig
+zig version  # should show 0.15.x or higher
+
+# Check SQLite
+sqlite3 --version  # should show 3.x.x
+pkg-config --modversion sqlite3  # should show version (optional)
+```
+
+**Install dependencies:**
+```bash
+# macOS
+brew install zig sqlite3
+
+# Ubuntu/Debian
+sudo apt install zig libsqlite3-dev
+
+# Arch Linux
+sudo pacman -S zig sqlite
+```
+
+**Build and install:**
 ```bash
 git clone https://github.com/manmal/planz.git
 cd planz
