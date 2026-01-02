@@ -18,9 +18,21 @@ A fast, hierarchical project planning CLI tool written in Zig. Manage tree-struc
 
 ## Installation
 
+### For AI Coding Agents
+
+**Claude Code** or [**pi**](https://github.com/mariozechner/pi):
+```
+Read https://raw.githubusercontent.com/manmal/planz/refs/heads/main/SKILL.md and install this as a skill.
+```
+
+**Codex CLI**:
+```
+Read https://raw.githubusercontent.com/manmal/planz/refs/heads/main/SKILL.md and install this as a skill.
+```
+
 ### From Source
 
-Requires [Zig 0.15+](https://ziglang.org/download/):
+Requires [Zig 0.15+](https://ziglang.org/download/) and SQLite3:
 
 ```bash
 git clone https://github.com/manmal/planz.git
@@ -31,9 +43,8 @@ make all  # builds and installs to ~/.local/bin/planz
 ### Pre-built Binaries
 
 Download from [Releases](https://github.com/manmal/planz/releases) for:
-- Linux (x86_64, aarch64)
+- Linux (x86_64)
 - macOS (x86_64, aarch64)
-- Windows (x86_64, aarch64)
 
 ## Quick Start
 
