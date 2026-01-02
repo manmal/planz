@@ -70,7 +70,6 @@ make all  # builds and installs to ~/.local/bin/planz
 Download from [Releases](https://github.com/manmal/planz/releases) for:
 - Linux (x86_64, aarch64) - dynamically links glibc and libsqlite3
 - macOS (aarch64/Apple Silicon) - dynamically links system SQLite; Intel Macs can run via Rosetta 2
-- Windows (x86_64) - statically linked SQLite, no dependencies
 
 **Note:** Linux binaries require SQLite3 to be installed:
 ```bash
