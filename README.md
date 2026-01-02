@@ -70,15 +70,11 @@ make all  # builds and installs to ~/.local/bin/planz
 Download from [Releases](https://github.com/manmal/planz/releases) for:
 - Linux (x86_64, aarch64) - dynamically links glibc and libsqlite3
 - macOS (x86_64, aarch64) - dynamically links system SQLite (included in macOS)
-- Windows (x86_64) - dynamically links SQLite3
 
-**Note:** Linux and Windows binaries require SQLite3 to be installed:
+**Note:** Linux binaries require SQLite3 to be installed:
 ```bash
 # Ubuntu/Debian
 sudo apt install libsqlite3-0
-
-# Windows (via Chocolatey)
-choco install sqlite
 ```
 
 ## Quick Start
