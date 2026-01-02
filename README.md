@@ -24,12 +24,12 @@ Let the agent install it:
 
 **Claude Code** or [**pi**](https://github.com/mariozechner/pi):
 ```
-Read https://code.claude.com/docs/en/skills.md, and then https://raw.githubusercontent.com/manmal/planz/refs/heads/main/README.md, and then install this plan skill.
+Read https://code.claude.com/docs/en/skills.md, and then https://raw.githubusercontent.com/manmal/planz/refs/heads/main/README.md, and then install this plan skill and ensure prerequisites.
 ```
 
 **Codex CLI**:
 ```
-Read https://developers.openai.com/codex/skills.md, and then https://raw.githubusercontent.com/manmal/planz/refs/heads/main/README.md, and then install this plan skill.
+Read https://developers.openai.com/codex/skills.md, and then https://raw.githubusercontent.com/manmal/planz/refs/heads/main/README.md, and then install this plan skill and ensure prerequisites.
 ```
 
 ### From Source
