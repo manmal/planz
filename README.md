@@ -1,7 +1,7 @@
 # planz
 
 [![CI](https://github.com/manmal/planz/actions/workflows/ci.yml/badge.svg)](https://github.com/manmal/planz/actions/workflows/ci.yml)
-[![Zig](https://img.shields.io/badge/Zig-0.15-orange)](https://ziglang.org/)
+[![Zig](https://img.shields.io/badge/Zig-0.15.2-orange)](https://ziglang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A fast, hierarchical project planning CLI tool written in Zig. Manage tree-structured plans with stable node IDs, cascading status updates, and multiple output formats.
