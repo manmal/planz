@@ -59,7 +59,7 @@ jobs:
       - name: Run tests
         run: ./tests/test_runner.sh
 
-  build-linux:
+  build-linux-x86_64:
     runs-on: ubuntu-latest
     needs: test
     steps:
@@ -73,30 +73,18 @@ jobs:
       - name: Install SQLite
         run: sudo apt-get update && sudo apt-get install -y libsqlite3-dev
       
-      - name: Build (x86_64)
+      - name: Build
         run: zig build -Doptimize=ReleaseSafe
-      
-      - name: Rename binary
-        run: |
-          mkdir -p dist
-          cp zig-out/bin/planz dist/planz-linux-x86_64
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: planz-linux-x86_64
-          path: dist/planz-linux-x86_64
+          path: zig-out/bin/planz
 
-  build-macos:
-    runs-on: macos-latest
+  build-linux-aarch64:
+    runs-on: ubuntu-24.04-arm
     needs: test
-    strategy:
-      matrix:
-        include:
-          - arch: x86_64
-            target: x86_64-macos
-          - arch: aarch64
-            target: aarch64-macos
     steps:
       - uses: actions/checkout@v4
       
@@ -105,16 +93,87 @@ jobs:
         with:
           version: 0.15.2
       
-      - name: Build for ${{ matrix.arch }}
-        run: zig build -Doptimize=ReleaseSafe
+      - name: Install SQLite
+        run: sudo apt-get update && sudo apt-get install -y libsqlite3-dev
       
-      - name: Rename binary
-        run: |
-          mkdir -p dist
-          cp zig-out/bin/planz dist/planz-macos-${{ matrix.arch }}
+      - name: Build
+        run: zig build -Doptimize=ReleaseSafe
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: planz-macos-${{ matrix.arch }}
-          path: dist/planz-macos-${{ matrix.arch }}
+          name: planz-linux-aarch64
+          path: zig-out/bin/planz
+
+  build-macos-x86_64:
+    runs-on: macos-13
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Zig
+        uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.15.2
+      
+      - name: Build
+        run: zig build -Doptimize=ReleaseSafe
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: planz-macos-x86_64
+          path: zig-out/bin/planz
+
+  build-macos-aarch64:
+    runs-on: macos-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Zig
+        uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.15.2
+      
+      - name: Build
+        run: zig build -Doptimize=ReleaseSafe
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: planz-macos-aarch64
+          path: zig-out/bin/planz
+
+  build-windows-x86_64:
+    runs-on: windows-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Zig
+        uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.15.2
+      
+      - name: Install SQLite
+        run: |
+          choco install sqlite -y
+          # Download SQLite amalgamation for headers
+          curl -L -o sqlite.zip https://www.sqlite.org/2024/sqlite-amalgamation-3450000.zip
+          unzip sqlite.zip
+          mkdir -p sqlite-dev/include
+          cp sqlite-amalgamation-3450000/sqlite3.h sqlite-dev/include/
+          cp sqlite-amalgamation-3450000/sqlite3.c sqlite-dev/
+        shell: bash
+      
+      - name: Build
+        run: zig build -Doptimize=ReleaseSafe
+        env:
+          C_INCLUDE_PATH: sqlite-dev/include
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: planz-windows-x86_64
+          path: zig-out/bin/planz.exe

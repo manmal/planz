@@ -66,8 +66,9 @@ make all  # builds and installs to ~/.local/bin/planz
 ### Pre-built Binaries
 
 Download from [Releases](https://github.com/manmal/planz/releases) for:
-- Linux (x86_64)
+- Linux (x86_64, aarch64)
 - macOS (x86_64, aarch64)
+- Windows (x86_64)
 
 ## Quick Start
 
