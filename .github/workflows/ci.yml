@@ -124,3 +124,23 @@ jobs:
         with:
           name: planz-macos-aarch64
           path: zig-out/bin/planz
+
+  build-windows-x86_64:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Zig
+        uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.15.2
+      
+      - name: Build (cross-compile with bundled SQLite)
+        run: zig build -Dtarget=x86_64-windows -Doptimize=ReleaseSafe -Dbundled-sqlite=true
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: planz-windows-x86_64
+          path: zig-out/bin/planz.exe
