@@ -20,14 +20,16 @@ A fast, hierarchical project planning CLI tool written in Zig. Manage tree-struc
 
 ### For AI Coding Agents
 
+Let the agent install it:
+
 **Claude Code** or [**pi**](https://github.com/mariozechner/pi):
 ```
-Read https://raw.githubusercontent.com/manmal/planz/refs/heads/main/SKILL.md and install this as a skill.
+Read https://code.claude.com/docs/en/skills.md, and then https://raw.githubusercontent.com/manmal/planz/refs/heads/main/SKILL.md, and then install this plan skill.
 ```
 
 **Codex CLI**:
 ```
-Read https://raw.githubusercontent.com/manmal/planz/refs/heads/main/SKILL.md and install this as a skill.
+Read https://developers.openai.com/codex/skills.md, and then https://raw.githubusercontent.com/manmal/planz/refs/heads/main/SKILL.md, and then install this plan skill.
 ```
 
 ### From Source
