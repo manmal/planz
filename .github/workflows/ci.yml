@@ -1,0 +1,110 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Zig
+        uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.15.0
+      
+      - name: Check formatting
+        run: zig fmt --check src/
+      
+      - name: Check line counts
+        run: |
+          max_lines=300
+          failed=0
+          for f in $(find src -name '*.zig'); do
+            lines=$(wc -l < "$f")
+            if [ "$lines" -gt "$max_lines" ]; then
+              echo "ERROR: $f has $lines lines (max: $max_lines)"
+              failed=1
+            fi
+          done
+          exit $failed
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Zig
+        uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.15.0
+      
+      - name: Build
+        run: zig build
+      
+      - name: Install
+        run: |
+          mkdir -p ~/.local/bin
+          cp zig-out/bin/planz ~/.local/bin/planz
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      
+      - name: Run tests
+        run: ./tests/test_runner.sh
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-linux
+            os_name: linux
+            arch: x86_64
+          - target: aarch64-linux
+            os_name: linux
+            arch: aarch64
+          - target: x86_64-macos
+            os_name: macos
+            arch: x86_64
+          - target: aarch64-macos
+            os_name: macos
+            arch: aarch64
+          - target: x86_64-windows
+            os_name: windows
+            arch: x86_64
+            ext: .exe
+          - target: aarch64-windows
+            os_name: windows
+            arch: aarch64
+            ext: .exe
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Zig
+        uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.15.0
+      
+      - name: Build for ${{ matrix.target }}
+        run: zig build -Dtarget=${{ matrix.target }} -Doptimize=ReleaseSafe
+      
+      - name: Rename binary
+        run: |
+          mkdir -p dist
+          if [ "${{ matrix.os_name }}" = "windows" ]; then
+            cp zig-out/bin/planz.exe dist/planz-${{ matrix.os_name }}-${{ matrix.arch }}.exe
+          else
+            cp zig-out/bin/planz dist/planz-${{ matrix.os_name }}-${{ matrix.arch }}
+          fi
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: planz-${{ matrix.os_name }}-${{ matrix.arch }}
+          path: dist/planz-${{ matrix.os_name }}-${{ matrix.arch }}${{ matrix.ext }}
