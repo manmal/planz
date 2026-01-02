@@ -13,7 +13,7 @@ const MAX_DEPTH = node_cmd.MAX_DEPTH;
 
 fn printUsage() void {
     fmt.eputs(
-        \\Usage: plan <command> [options]
+        \\Usage: planz <command> [options]
         \\
         \\Plans: create|delete|rename-plan|list|projects|delete-project|summarize
         \\Nodes: add|remove|rename|describe|move|refine|done|undone
