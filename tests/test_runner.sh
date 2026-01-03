@@ -21,7 +21,7 @@ export HOME_BACKUP="$HOME"
 
 # Setup test environment
 setup() {
-    mkdir -p "$TEST_DB_DIR/.claude/skills/plan/data"
+    mkdir -p "$TEST_DB_DIR/.local/share/planz"
     export HOME="$TEST_DB_DIR"
     # Ensure planz binary uses test DB
     echo "Using test DB at: $TEST_DB_DIR"

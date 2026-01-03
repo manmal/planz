@@ -4,7 +4,7 @@ const c = @cImport({
     @cInclude("sqlite3.h");
 });
 
-pub const DB_DIR = "/.claude/skills/plan/data";
+pub const DB_DIR = "/.local/share/planz";
 pub const DB_NAME = "/plans.db";
 pub const LOCK_NAME = "/plans.db.lock";
 const schema = @import("schema.zig");

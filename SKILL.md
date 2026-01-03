@@ -5,7 +5,7 @@ description: Manage hierarchical project plans in SQLite. Tree-based structure w
 
 # planz - Hierarchical Project Planning
 
-Binary: `~/.local/bin/planz` | DB: `~/.claude/skills/plan/data/plans.db` (SQLite WAL)
+Binary: `~/.local/bin/planz` | DB: `~/.local/share/planz/plans.db (SQLite WAL)
 
 ## Fractal Planning: Refine Until Nothing is Left for Interpretation
 
