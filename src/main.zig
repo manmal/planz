@@ -15,13 +15,37 @@ fn printUsage() void {
     fmt.eputs(
         \\Usage: planz <command> [options]
         \\
-        \\Plans: create|delete|rename-plan|list|projects|delete-project|summarize
-        \\Nodes: add|remove|rename|describe|move|refine|done|undone
-        \\View:  show [--json|--xml|--md], progress
+        \\Plan Management:
+        \\  create <name>                    Create new plan
+        \\  delete <name>                    Delete plan and all nodes
+        \\  rename-plan <old> <new>          Rename plan
+        \\  list                             List plans in project
+        \\  projects                         List all projects
+        \\  delete-project                   Delete current project
+        \\  summarize <name> --summary "..." Set plan summary
         \\
-        \\Options: --project <path>, --desc <text>, --force, --to <path>, --after <sibling>
-        \\Path:    Slash-separated, e.g. "Phase 1/Task A", max 4 levels
-        \\Node ID: Use #<id> or path, e.g. "#5" or "Phase 1/Task A"
+        \\Node Management:
+        \\  add <plan> <path> [--desc "..."] Add node (path: "Phase 1/Task A")
+        \\  remove <plan> <node> [--force]   Remove node (#id or path)
+        \\  rename <plan> <node> <new-name>  Rename node
+        \\  describe <plan> <node> --desc    Set description
+        \\  move <plan> <node> --to <parent> Move node
+        \\  refine <plan> <node> --add ...   Expand leaf into children
+        \\
+        \\Status:
+        \\  done <plan> <node>...            Mark done (cascades down)
+        \\  undone <plan> <node>...          Mark undone (propagates up)
+        \\
+        \\View:
+        \\  show <plan> [node] [--json|--xml|--md]
+        \\  progress <plan>                  Show progress bars
+        \\
+        \\Options:
+        \\  --project <path>   Use different project directory
+        \\  --force            Force remove nodes with children
+        \\  --add <child>      Add child in refine (repeatable)
+        \\
+        \\Note: Task names cannot contain "/" (path separator)
         \\
     );
 }
