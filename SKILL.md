@@ -19,6 +19,20 @@ Binary: `~/.local/bin/planz` | DB: `~/.claude/skills/plan/data/plans.db` (SQLite
 4. **Repeat** - Continue until every leaf node is atomic and unambiguous
 5. **Execute & update** - Work through leaves, marking done, and refine new ambiguity as it emerges
 
+### ⚠️ Important: No Slashes in Task Names
+
+The `/` character is the path separator. **Never use slashes in task titles:**
+
+```bash
+# ❌ WRONG - creates nested path "API" -> "auth endpoint"
+planz add myplan "API/auth endpoint"
+
+# ✅ CORRECT - use other separators
+planz add myplan "API - auth endpoint"
+planz add myplan "API: auth endpoint"
+planz add myplan "API auth endpoint"
+```
+
 ### What "Nothing Left for Interpretation" Means
 
 A leaf node is **ready for execution** when:
